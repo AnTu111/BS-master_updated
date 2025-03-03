@@ -1,13 +1,13 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const { connectDB } = require('./src/config/db'); // Импортируем connectDB
+const { connectDB } = require('./src/config/db'); // Import connectDB
 
 // Load environment variables
 dotenv.config();
 
 // Connect to MongoDB
-connectDB(); // Вызываем connectDB
+connectDB(); // Call connectDB
 
 // Create Express app
 const app = express();
@@ -16,6 +16,11 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Define a route for the root path ("/")
+app.get('/', (req, res) => {
+    res.send('Welcome to the Barber Shop API!'); // Or any other message/content
+});
 
 // Routes
 app.use('/api/clients', require('./routes/clientRoutes'));
